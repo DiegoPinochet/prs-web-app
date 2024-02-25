@@ -1,4 +1,4 @@
-import { Button } from "@/components/generalUI/Button";
+import { Button } from "@/components/ui/button";
 
 const Login = () => {
   return (
@@ -62,9 +62,7 @@ const Login = () => {
                   </div>
 
                   <div className="flex flex-row">
-                    <Button type="primary" className="w-full">
-                      Send login email
-                    </Button>
+                    <Button className="w-full">Send login email</Button>
                   </div>
                 </form>
               </div>

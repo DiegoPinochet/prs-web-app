@@ -1,77 +1,108 @@
 "use client";
 
+import ComboBox from "@/components/generalUI/ComboBox";
 import { Select } from "@/components/generalUI/Select";
-import { redirect } from "next/navigation";
+import { Table } from "@/components/generalUI/Table";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
+import { zodResolver } from "@hookform/resolvers/zod";
+import z from "zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { PRCard } from "@/components/pages/ViewPRs/PRCard";
 
-const UserPRs = ({
-  params,
-  searchParams,
-}: {
-  params: { slug: string };
-  searchParams: { exercise: string };
-}) => {
-  const getExercisesByDisciplineOptions = () => {
+const UserPRs = ({ params }: { params: { slug: string } }) => {
+  const [discipline, setDiscipline] = useState<string>();
+  const [exercise, setExercise] = useState<string>();
+
+  const getDisciplineOptions = () => {
+    return [
+      {
+        label: "Crossfit",
+        value: "crossfit",
+      },
+      {
+        label: "Running",
+        value: "running",
+      },
+    ];
+  };
+
+  const getExercisesOptions = () => {
     if (params.slug === "diego") {
-      return [
-        {
-          groupLabel: "Crossfit",
-          groupOptions: [
-            {
-              label: "Split Jerk",
-              value: "splitJerk",
-            },
-            {
-              label: "Back Squat",
-              value: "backSquat",
-            },
-            {
-              label: "Front Squat",
-              value: "frontSquat",
-            },
-            {
-              label: "Strict Shoulder Press",
-              value: "strictShoulderPress",
-            },
-            {
-              label: "Over Head Squat",
-              value: "overHeadSquat",
-            },
-            {
-              label: "Squat Snatch",
-              value: "squatSnatch",
-            },
-            {
-              label: "Squat Clean",
-              value: "squatClean",
-            },
-            {
-              label: "Deadlift",
-              value: "deadlift",
-            },
-            {
-              label: "Bench Press",
-              value: "benchPress",
-            },
-          ],
-        },
-        {
-          groupLabel: "Running",
-          groupOptions: [
-            {
-              label: "5k",
-              value: "5k",
-            },
-            {
-              label: "10k",
-              value: "10k",
-            },
-            {
-              label: "Half Marathon",
-              value: "halfMarathon",
-            },
-          ],
-        },
-      ];
+      if (discipline === "crossfit") {
+        return [
+          {
+            label: "Split Jerk",
+            value: "split-jerk",
+          },
+          {
+            label: "Back Squat",
+            value: "back-squat",
+          },
+          {
+            label: "Front Squat",
+            value: "front-squat",
+          },
+          {
+            label: "Strict Shoulder Press",
+            value: "strict-shoulder-press",
+          },
+          {
+            label: "Over Head Squat",
+            value: "over-head-squat",
+          },
+          {
+            label: "Squat Snatch",
+            value: "squat-snatch",
+          },
+          {
+            label: "Squat Clean",
+            value: "squat-clean",
+          },
+          {
+            label: "Deadlift",
+            value: "deadlift",
+          },
+          {
+            label: "Bench Press",
+            value: "bench-press",
+          },
+        ];
+      }
+      if (discipline === "running") {
+        return [
+          {
+            label: "5k",
+            value: "5k",
+          },
+          {
+            label: "10k",
+            value: "10k",
+          },
+          {
+            label: "Half Marathon",
+            value: "half-marathon",
+          },
+        ];
+      }
     }
     return [];
   };
@@ -86,15 +117,24 @@ const UserPRs = ({
       <div className="mt-5">
         <div className="flex justify-center">
           <Select
-            className=" w-5/6"
-            placeholder="Exercises"
-            options={getExercisesByDisciplineOptions()}
+            className="w-11/12"
+            placeholder="Discipline..."
+            options={getDisciplineOptions()}
             onValueChange={(value) => {
-              redirect(`/diego?exercise=${value}`);
+              setDiscipline(value);
             }}
-            defaultValue={searchParams.exercise}
           />
         </div>
+        <div className="mt-5 flex justify-center">
+          <ComboBox
+            options={getExercisesOptions()}
+            onValueChange={setExercise}
+            placeholder="Exercise..."
+            className="w-11/12"
+            disabled={!discipline}
+          />
+        </div>
+        {exercise && <PRCard exercise={exercise} />}
       </div>
     </div>
   );

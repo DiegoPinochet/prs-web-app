@@ -12,8 +12,8 @@ import { FC } from "react";
 export interface SelectProps {
   placeholder: string;
   options: {
-    groupLabel: string;
-    groupOptions: { label: string; value: string }[];
+    label: string;
+    value: string;
   }[];
   disabled?: boolean;
   className?: string;
@@ -39,20 +39,11 @@ export const Select: FC<SelectProps> = ({
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
-        <SelectGroup>
-          {options.map((option) => (
-            <>
-              <SelectLabel key={option.groupLabel}>
-                {option.groupLabel}
-              </SelectLabel>
-              {option.groupOptions.map((groupOption) => (
-                <SelectItem key={groupOption.value} value={groupOption.value}>
-                  {groupOption.label}
-                </SelectItem>
-              ))}
-            </>
-          ))}
-        </SelectGroup>
+        {options.map((options) => (
+          <SelectItem key={options.value} value={options.value}>
+            {options.label}
+          </SelectItem>
+        ))}
       </SelectContent>
     </SelectComponent>
   );
