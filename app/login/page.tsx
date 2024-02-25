@@ -1,9 +1,9 @@
-import { Button } from "@/components/generalUI/Button";
+import { Button } from "@/components/ui/button";
 
 const Login = () => {
   return (
     <>
-      <div className="">
+      <div className="relative">
         <div
           className="absolute inset-x-0 -top-30 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
           aria-hidden="true"
@@ -62,9 +62,7 @@ const Login = () => {
                   </div>
 
                   <div className="flex flex-row">
-                    <Button type="primary" className="w-full">
-                      Send login email
-                    </Button>
+                    <Button className="w-full">Send login email</Button>
                   </div>
                 </form>
               </div>
