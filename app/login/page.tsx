@@ -3,7 +3,7 @@ import { Button } from "@/components/generalUI/Button";
 const Login = () => {
   return (
     <>
-      <div className="">
+      <div className="relative">
         <div
           className="absolute inset-x-0 -top-30 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
           aria-hidden="true"
