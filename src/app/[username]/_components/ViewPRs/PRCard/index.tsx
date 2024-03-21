@@ -1,5 +1,4 @@
 import { Table } from "@/components/generalUI/Table";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,41 +7,31 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { FC, useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { PRCardForm } from "./Form";
+import { Exercise } from "@/src/types";
 
 export interface PRCardProps {
-  exercise: string;
+  exercise: Exercise;
 }
 
-export const PRCard: FC<PRCardProps> = () => {
+export const PRCard: FC<PRCardProps> = ({ exercise }: PRCardProps) => {
   const [percentage, setPercentage] = useState<number>(100);
 
   const getTableData = () => {
+    const pr = Number(exercise.pr);
     return [
       {
         units: "kg",
-        "0.6": "72",
-        "0.8": "96",
-        "1": "120",
+        "0.6": (pr * 0.6).toString(),
+        "0.8": (pr * 0.8).toString(),
+        "1": pr.toString(),
       },
       {
         units: "lb",
-        "0.6": "135",
-        "0.8": "180",
-        "1": "225",
+        "0.6": toLbs(pr * 0.6),
+        "0.8": toLbs(pr * 0.8),
+        "1": toLbs(pr),
       },
     ];
   };
@@ -69,14 +58,14 @@ export const PRCard: FC<PRCardProps> = () => {
   };
 
   const toLbs = (kg: number) => {
-    return kg * 2.20462;
+    return (kg * 2.20462).toFixed(0);
   };
 
   const renderCardWeightTitle = () => {
-    const kg = 120 * (percentage / 100);
+    const kg = Number(exercise.pr) * (percentage / 100);
     const lb = toLbs(kg);
 
-    return `${kg.toFixed(0)}kg/${lb.toFixed(0)}lb`;
+    return `${kg.toFixed(0)}kg/${lb}lb`;
   };
 
   return (
@@ -84,7 +73,9 @@ export const PRCard: FC<PRCardProps> = () => {
       <div className="flex justify-center">
         <Card className="w-11/12  backdrop-blur bg-white/5">
           <CardHeader>
-            <CardTitle className="text-center text-3xl">Squat Clean</CardTitle>
+            <CardTitle className="text-center text-3xl">
+              {exercise.name}
+            </CardTitle>
             <div className="w-full border-b-2 border-gray-200 my-4" />
             <CardTitle className="text-center text-2xl">
               {renderCardWeightTitle()}
