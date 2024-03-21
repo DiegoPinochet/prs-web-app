@@ -1,4 +1,4 @@
-import { Button } from "@/components/generalUI/Button";
+import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/generalUI/Navbar";
 import Link from "next/link";
 
@@ -33,7 +33,7 @@ const Home = () => {
                 </p>
                 <div className="mt-10 flex items-center justify-center">
                   <Link href="/signup">
-                    <Button type="primary">Get started</Button>
+                    <Button className="bg-primary">Get started</Button>
                   </Link>
                 </div>
               </div>

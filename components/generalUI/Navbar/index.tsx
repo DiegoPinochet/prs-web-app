@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Button } from "../Button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -30,8 +30,8 @@ export const Navbar: FC = () => {
           </a>
         </div>
         <div className="flex lg:hidden">
-          <Link href="/login">
-            <Button type="primary">Update PRs</Button>
+          <Link href="/sign-in">
+            <Button className="bg-primary">Update PRs</Button>
           </Link>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
