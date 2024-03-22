@@ -43,7 +43,7 @@ export const ShowUserPrs: FC<ShowPRProps> = ({
           }}
         />
       </div>
-      <div className="max-h-7/10 overflow-auto mt-5">
+      <div className="max-h-[calc(7/10-2rem)]overflow-auto mt-5">
         {userExercises.map((exercise) => (
           <PRCard key={exercise.name} exercise={exercise} />
         ))}

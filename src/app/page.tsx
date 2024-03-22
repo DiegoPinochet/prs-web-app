@@ -36,13 +36,20 @@ const Home = async () => {
                 </h1>
                 <p className="mt-6 text-lg leading-8 text-gray-600">
                   Aquí podrás ver tus PRs solo utilizando tu nombre de usuario
-                  en el url. Por ejemplo{" "}
-                  <a href="/diego">{process.env.DEPLOYMENT_URL}/diego</a>. Para
-                  crear PRs necesitas una cuenta, solo tarda 3 minutos.
+                  en el url. Revisa:
                 </p>
-                <div className="mt-10 flex items-center justify-center">
-                  <Link href="/signup">
-                    <Button className="bg-primary">Vamos</Button>
+                <p className="mt-2 text-lg leading-8 text-gray-600">
+                  <Link href="/diego" className="text-primary">
+                    {process.env.DEPLOYMENT_URL}/diego
+                  </Link>
+                  .
+                </p>
+                <p className="mt-2 text-lg leading-8 text-gray-600">
+                  Para crear PRs necesitas una cuenta, solo tarda 3 minutos.
+                </p>
+                <div className="mt-10 flex items-center justify-center w-full">
+                  <Link href="/signup" className="w-full">
+                    <Button className="bg-primary w-full">Vamos</Button>
                   </Link>
                 </div>
               </div>
