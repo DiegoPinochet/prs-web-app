@@ -11,7 +11,7 @@ export default async function PR({ params }: { params: { username: string } }) {
     listDisciplineFetcher(),
   ]);
   return (
-    <div className="mt-5">
+    <div>
       {user && (
         <div className="flex flex-row px-4 w-full">
           <UpsertPrDialog
