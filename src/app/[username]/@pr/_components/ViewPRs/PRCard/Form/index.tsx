@@ -7,7 +7,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
@@ -50,15 +49,15 @@ export const PRCardForm: FC<PRCardFormProps> = ({ setPercentage }) => {
                   {...field}
                   type="number"
                   min={1}
-                  placeholder="Percentage of 1RM: 100"
+                  placeholder="Porcentaje de 1RM: 100"
                 />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button className="ml-1" type="submit" variant="ghost" size="icon">
-          <MagnifyingGlassIcon className="text-primary" />
+        <Button className="ml-1" type="submit">
+          Buscar
         </Button>
       </form>
     </Form>

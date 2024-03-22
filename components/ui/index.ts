@@ -8,3 +8,6 @@ export * from "./command";
 export * from "./label";
 export * from "./popover";
 export * from "./select";
+export * from "./dialog";
+export * from "./toast";
+export * from "./skeleton";
