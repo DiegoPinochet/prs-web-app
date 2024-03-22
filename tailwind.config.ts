@@ -19,7 +19,7 @@ const config = {
     },
     extend: {
       maxHeight: {
-        "4/5": "70vh",
+        "7/10": "70vh",
       },
       colors: {
         border: "hsl(var(--border))",
