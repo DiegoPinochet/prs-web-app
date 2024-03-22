@@ -1,88 +1,38 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-"use client";
+"use server";
 
-import { Select } from "@/components/generalUI/Select";
-import { useEffect, useState } from "react";
-import { PRCard } from "@/src/app/[username]/_components/ViewPRs/PRCard";
-import {
-  getUserDisciplinesFetcher,
-  getUserExercisesFetcher,
-} from "./_fetchers/get-user-disciplines.fetcher";
-import { Exercise } from "@/src/types";
-import { User } from "@clerk/nextjs/server";
-import { Button } from "@/components/ui";
+import { getUserDisciplinesFetcher } from "./_fetchers/get-user-disciplines.fetcher";
 import { getCurrentUser } from "./_fetchers/get-current.fetcher";
+import { UpsertPrDialog } from "./@pr/_components/upsert-pr-dialog";
+import { ShowUserPrs } from "./_components/show-user-prs";
+import { listDisciplineFetcher } from "./@pr/_fetchers/list-disciplines.fetcher";
 
-const UserPRs = ({ params }: { params: { username: string } }) => {
-  const [disciplines, setDisciplines] = useState<
-    { label: string; value: string }[]
-  >([]);
-  const [discipline, setDiscipline] = useState<string>();
-  const [exercises, setExercises] = useState<Exercise[]>([]);
-
-  const [user, setUser] = useState<User | null>();
-
-  const getUser = async () => {
-    const user = await getCurrentUser();
-    setUser(user);
-  };
-
-  const getDisciplineOptions = async () => {
-    const disciplines = await getUserDisciplinesFetcher(params.username);
-    setDisciplines(disciplines);
-  };
-
-  const getExercisesOptions = async () => {
-    if (!discipline) {
-      return [];
-    }
-    const exercises = await getUserExercisesFetcher(
-      params.username,
-      discipline
-    );
-
-    setExercises(exercises);
-  };
-
-  useEffect(() => {
-    getDisciplineOptions();
-  }, []);
-
-  useEffect(() => {
-    getExercisesOptions();
-  }, [discipline]);
-
-  useEffect(() => {
-    getUser();
-  }, []);
+const UserPRs = async ({ params }: { params: { username: string } }) => {
+  const [user, userDisciplines, disciplines] = await Promise.all([
+    getCurrentUser(),
+    getUserDisciplinesFetcher(params.username),
+    listDisciplineFetcher(),
+  ]);
 
   return (
     <div>
       <h2 className="text-2xl font-bold leading-9 tracking-tight text-center">
         PRs
       </h2>
-      <p className="text-center">Search PRs by discipline or exercise.</p>
+      <p className="text-center">Busca PRs por disciplina y por ejericio.</p>
 
       <div className="mt-5">
         {user && (
-          <div className="flex flex-row justify-end px-4">
-            <Button className="w-full">Add PR</Button>
+          <div className="flex flex-row px-4 w-full">
+            <UpsertPrDialog
+              username={params.username}
+              disciplineOptions={disciplines}
+            />
           </div>
         )}
-        <div className="flex justify-center px-4 mt-5">
-          <Select
-            placeholder="Discipline..."
-            options={disciplines}
-            onValueChange={(value) => {
-              setDiscipline(value);
-            }}
-          />
-        </div>
-        <div className=" max-h-4/5 overflow-auto">
-          {exercises.map((exercise) => (
-            <PRCard key={exercise.name} exercise={exercise} />
-          ))}
-        </div>
+        <ShowUserPrs
+          username={params.username}
+          userDisciplines={userDisciplines}
+        />
       </div>
     </div>
   );

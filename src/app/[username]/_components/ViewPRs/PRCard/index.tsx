@@ -23,9 +23,9 @@ export const PRCard: FC<PRCardProps> = ({ exercise }: PRCardProps) => {
     return [
       {
         units: "kg",
-        "0.6": (pr * 0.6).toString(),
-        "0.8": (pr * 0.8).toString(),
-        "1": pr.toString(),
+        "0.6": (pr * 0.6).toFixed(0),
+        "0.8": (pr * 0.8).toFixed(0),
+        "1": pr.toFixed(0),
       },
       {
         units: "lb",

@@ -1,10 +1,16 @@
 "use server";
 
+import { DisciplineRepository } from "../repositories/discipline.repository";
 import { UserRepository } from "../repositories/user.repository";
 
-export const getUserDisciplines = async (
+export const getUserDisciplinesUseCase = async (
   username: string,
-  userRepository: UserRepository
+  userRepository: UserRepository,
+  disciplineRepository: DisciplineRepository
 ) => {
-  return userRepository.getUserDisciplines(username);
+  const disciplines = await userRepository.getUserDisciplines(username);
+  const mappedDisciplines = await disciplineRepository.mapDisciplines(
+    disciplines
+  );
+  return mappedDisciplines;
 };
