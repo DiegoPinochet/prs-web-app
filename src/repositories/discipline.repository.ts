@@ -66,8 +66,6 @@ export class DisciplineRepository {
       };
     });
 
-    console.log(mappedDisciplines);
-
     return mappedDisciplines.filter((d) => d) as Disciplines[];
   }
 }

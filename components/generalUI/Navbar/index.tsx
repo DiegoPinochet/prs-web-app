@@ -31,13 +31,13 @@ export const Navbar: FC = () => {
         </div>
         <div className="flex lg:hidden">
           <Link href="/sign-in">
-            <Button className="bg-primary">Update PRs</Button>
+            <Button className="bg-primary">Actualiza tus PRs</Button>
           </Link>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+          <Link href="/sign-in">
+            <Button className="bg-primary">Actualiza tus PRs</Button>
+          </Link>
         </div>
       </nav>
     </header>

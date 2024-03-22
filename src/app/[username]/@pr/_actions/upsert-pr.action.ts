@@ -26,8 +26,6 @@ export const UpsertPrAction = async ({
     userRepository
   );
 
-  console.log("result", result);
-
   if (!result) {
     return {
       success: false,

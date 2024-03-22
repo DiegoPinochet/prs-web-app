@@ -32,16 +32,17 @@ const Home = async () => {
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
               <div className="mx-auto max-w-2xl text-center">
                 <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                  Have your PRs on the go
+                  Ten tus PRs en un solo lugar
                 </h1>
                 <p className="mt-6 text-lg leading-8 text-gray-600">
-                  Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
-                  qui lorem cupidatat commodo. Elit sunt amet fugiat veniam
-                  occaecat fugiat aliqua.
+                  Aquí podrás ver tus PRs solo utilizando tu nombre de usuario
+                  en el url. Por ejemplo{" "}
+                  <a href="/diego">{process.env.DEPLOYMENT_URL}/diego</a>. Para
+                  crear PRs necesitas una cuenta, solo tarda 3 minutos.
                 </p>
                 <div className="mt-10 flex items-center justify-center">
                   <Link href="/signup">
-                    <Button className="bg-primary">Get started</Button>
+                    <Button className="bg-primary">Vamos</Button>
                   </Link>
                 </div>
               </div>
