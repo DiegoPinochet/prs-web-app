@@ -1,6 +1,12 @@
 import { ReactNode } from "react";
 
-const UserPRsLayout = ({ children }: { children: ReactNode }) => {
+const UserPRsLayout = ({
+  children,
+  pr,
+}: {
+  children: ReactNode;
+  pr: ReactNode;
+}) => {
   return (
     <>
       <div className="relative">
@@ -16,7 +22,10 @@ const UserPRsLayout = ({ children }: { children: ReactNode }) => {
             }}
           />
         </div>
-        <div className="py-8">{children}</div>
+        <div className="py-8">
+          {children}
+          {pr}
+        </div>
       </div>
     </>
   );
