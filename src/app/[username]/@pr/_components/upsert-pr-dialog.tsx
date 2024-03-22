@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { WithUpsertPrForm } from "./with-upsert-pr";
 import { UpsertPrForm } from "./upsert-pr-form";
 
@@ -25,7 +25,7 @@ export const UpsertPrDialog: FC<UpsertPrDialogProps> = ({
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
-      <DialogTrigger className="w-full">
+      <DialogTrigger className="flex flex-row justify-center" asChild>
         <Button className="w-full">Agregar PR</Button>
       </DialogTrigger>
       <DialogContent>

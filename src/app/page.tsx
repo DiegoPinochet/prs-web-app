@@ -1,8 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/generalUI/Navbar";
 import Link from "next/link";
+import { getCurrentUser } from "./_fetchers/get-current.fetcher";
+import { redirect } from "next/navigation";
 
-const Home = () => {
+const Home = async () => {
+  const user = await getCurrentUser();
+
+  if (user) {
+    redirect(`/${user.username}`);
+  }
+
   return (
     <div>
       <Navbar />
